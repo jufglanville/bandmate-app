@@ -1,2 +1,2 @@
 npx next lint --fix
-npx prettier --write
+npx prettier --write "**/*.ts?(x)"
