@@ -8,7 +8,7 @@ Band Finder is a platform designed for musicians to connect, form bands, and fin
 - **Storybook** for component development
 - **CI/CD**: GitHub Actions
 - **Error Tracking**: Sentry
-- **Database**: PostgreSQL (coming soon)
+- **Database**: Supabase (coming soon)
 
 ## Getting Started
 
