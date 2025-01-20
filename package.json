@@ -11,10 +11,10 @@
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook",
     "prepare": "husky",
-    "supabase:start": "supabase start",
-    "supabase:stop": "supabase stop",
-    "supabase:db:push": "supabase db push",
-    "supabase:db:pull": "supabase db pull"
+    "supabase:dev:start": "supabase start",
+    "supabase:dev:stop": "supabase stop",
+    "supabase:live:push": "supabase db push",
+    "supabase:live:pull": "supabase db pull"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.7.4",
