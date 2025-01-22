@@ -1,13 +1,20 @@
 import { supabase } from './client';
 
-export async function fetchUserById(userId: string) {
-  // Replace 'users' with the name of your users table
+export async function fetchUserDetailsById(userId: string) {
   const { data, error } = await supabase
     .from('users')
     .select(
       `
-      *,
-      user_details(*)
+      id,
+      email,
+      name,
+      user_details!inner (
+        forename,
+        surname,
+        address_line_1,
+        city,
+        phone_number
+      )
     `,
     )
     .eq('id', userId)

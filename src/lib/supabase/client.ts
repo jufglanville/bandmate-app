@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { Database } from './database.types';
 
 // Utility to resolve environment variables
 const getEnvVar = (localKey: string, prodKey: string): string => {
@@ -18,4 +19,4 @@ export const supabaseRoleKey = getEnvVar(
 );
 export const supabaseJWTSecret = process.env.SUPABASE_JWT_SECRET as string;
 
-export const supabase = createClient(supabaseURL, supabaseRoleKey);
+export const supabase = createClient<Database>(supabaseURL, supabaseRoleKey);

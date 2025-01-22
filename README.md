@@ -74,7 +74,17 @@ supabase db reset
 
 This will delete all the data in the local database and run the migrations giving a new fresh blank database.
 
-#### d. Stop the Local Database
+#### d. Generate Types
+
+To generate types for the Supabase client, run:
+
+```bash
+npm run supabase:generate-types
+```
+
+This will generate TypeScript types for the Supabase client in the `src/lib/supabase` folder.
+
+#### e. Stop the Local Database
 
 To stop the local database, run:
 
