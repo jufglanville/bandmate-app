@@ -1,18 +1,14 @@
 import { redirect } from 'next/navigation';
-import { auth } from '@/app/auth';
-
 import { fetchUserDetailsById } from '@/lib/supabase/getUsers';
+import { getUserSession } from '@/app/auth';
 
 const page = async () => {
   // Get the user session
-  const session = await auth();
-  if (!session?.user) return redirect('/auth/signin');
+  const userSession = await getUserSession();
 
   // Get user details
-  const user = await fetchUserDetailsById(session.user.id as string);
+  const user = await fetchUserDetailsById(userSession.id);
   if (!user) return redirect('/auth/signin');
-
-  console.log(user);
 
   return (
     <div>

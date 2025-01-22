@@ -3,12 +3,23 @@ import GitHub from 'next-auth/providers/github';
 import type { Provider } from 'next-auth/providers';
 import { SupabaseAdapter } from '@auth/supabase-adapter';
 import jwt from 'jsonwebtoken';
+import { redirect } from 'next/navigation';
 
 import {
   supabaseURL,
   supabaseRoleKey,
   supabaseJWTSecret,
 } from '@/lib/supabase/client';
+
+// Interface for session object
+interface ISession {
+  user: {
+    id: string;
+    email: string;
+    image: string;
+    name: string;
+  };
+}
 
 // Providers configuration
 const providers: Provider[] = [GitHub];
@@ -58,3 +69,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
   },
 });
+
+// Get the user session
+export const getUserSession = async () => {
+  const session = (await auth()) as ISession;
+  if (!session?.user) return redirect('/auth/signin');
+
+  return session.user;
+};
