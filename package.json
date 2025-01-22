@@ -14,7 +14,8 @@
     "supabase:dev:start": "supabase start",
     "supabase:dev:stop": "supabase stop",
     "supabase:live:push": "supabase db push",
-    "supabase:live:pull": "supabase db pull"
+    "supabase:live:pull": "supabase db pull",
+    "supabase:generate-types": "supabase gen types typescript --local > src/lib/supabase/database.types.ts"
   },
   "dependencies": {
     "@auth/supabase-adapter": "^1.7.4",

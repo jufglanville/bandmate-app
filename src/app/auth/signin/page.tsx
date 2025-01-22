@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { signIn, providerMap } from '../auth';
+import { signIn, providerMap } from '@/lib/auth';
 import { AuthError } from 'next-auth';
 
 const SIGNIN_ERROR_URL = '/auth/error';
@@ -37,7 +37,7 @@ export default async function SignInPage() {
             'use server';
             try {
               await signIn(provider.id, {
-                redirectTo: '/',
+                redirectTo: '/dashboard',
               });
             } catch (error) {
               // Signin can fail for a number of reasons, such as the user
