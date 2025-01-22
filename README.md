@@ -64,7 +64,17 @@ supabase migration new <table_name>
 
 This will create a migration file in the `migrations` folder. You can then write the SQL commands for creating the table in the migration file.
 
-#### c. Stop the Local Database
+#### c. Resetting local database
+
+To run reset the local database, run:
+
+```bash
+supabase db reset
+```
+
+This will delete all the data in the local database and run the migrations giving a new fresh blank database.
+
+#### d. Stop the Local Database
 
 To stop the local database, run:
 

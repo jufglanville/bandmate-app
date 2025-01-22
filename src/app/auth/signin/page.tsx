@@ -37,7 +37,7 @@ export default async function SignInPage() {
             'use server';
             try {
               await signIn(provider.id, {
-                redirectTo: '/',
+                redirectTo: '/dashboard',
               });
             } catch (error) {
               // Signin can fail for a number of reasons, such as the user

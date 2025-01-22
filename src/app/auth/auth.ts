@@ -2,31 +2,13 @@ import NextAuth from 'next-auth';
 import GitHub from 'next-auth/providers/github';
 import type { Provider } from 'next-auth/providers';
 import { SupabaseAdapter } from '@auth/supabase-adapter';
-import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import jwt from 'jsonwebtoken';
 
-// Utility to resolve environment variables
-const getEnvVar = (localKey: string, prodKey: string): string => {
-  return process.env.NODE_ENV === 'development'
-    ? (process.env[localKey] as string)
-    : (process.env[prodKey] as string);
-};
-
-// Resolve Supabase configuration
-const supabaseURL = getEnvVar(
-  'NEXT_PUBLIC_SUPABASE_URL_LOCAL',
-  'NEXT_PUBLIC_SUPABASE_URL',
-);
-const supabaseRoleKey = getEnvVar(
-  'SUPABASE_SERVICE_ROLE_KEY_LOCAL',
-  'SUPABASE_SERVICE_ROLE_KEY',
-);
-const supabaseJWTSecret = process.env.SUPABASE_JWT_SECRET as string;
-
-// Create a reusable Supabase client
-export const createSupabaseClient = (): SupabaseClient => {
-  return createClient(supabaseURL, supabaseRoleKey);
-};
+import {
+  supabaseURL,
+  supabaseRoleKey,
+  supabaseJWTSecret,
+} from '@/lib/supabase/client';
 
 // Providers configuration
 const providers: Provider[] = [GitHub];
