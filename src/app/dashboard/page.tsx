@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { fetchUserDetailsById } from '@/lib/supabase/getUsers';
-import { getUserSession } from '@/app/auth';
+import { getUserSession } from '@/lib/auth';
 
 const page = async () => {
   // Get the user session
