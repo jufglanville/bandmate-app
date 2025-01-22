@@ -1,4 +1,4 @@
-import { supabase } from './client';
+import { supabase } from '../client';
 
 export async function fetchUserDetailsById(userId: string) {
   const { data, error } = await supabase
