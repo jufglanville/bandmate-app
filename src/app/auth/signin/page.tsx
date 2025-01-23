@@ -7,6 +7,9 @@ const SIGNIN_ERROR_URL = '/auth/error';
 export default async function SignInPage() {
   return (
     <div className="flex flex-col gap-2">
+      <p>GITHUB_ID: {process.env.AUTH_GITHUB_ID}</p>
+      <p>AUTH_GITHUB_SECRET: {process.env.AUTH_GITHUB_SECRET}</p>
+
       <form
         action={async (formData) => {
           'use server';
