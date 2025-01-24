@@ -30,6 +30,22 @@ export default async function SignInPage() {
         </label>
         <input type="submit" value="Sign In" />
       </form>
+
+      <form
+        action={async (formData) => {
+          'use server';
+          await signIn('sendgrid', formData);
+        }}
+      >
+        <input
+          type="text"
+          name="email"
+          placeholder="Email"
+          className="p-1 border-solid"
+        />
+        <button type="submit">Signin with Sendgrid</button>
+      </form>
+
       {Object.values(providerMap).map((provider) => (
         <form
           key={provider.id}
