@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth';
+import SendGrid from 'next-auth/providers/sendgrid';
 import GitHub from 'next-auth/providers/github';
 import type { Provider } from 'next-auth/providers';
 import { SupabaseAdapter } from '@auth/supabase-adapter';
@@ -22,7 +23,10 @@ interface ISession {
 }
 
 // Providers configuration
-const providers: Provider[] = [GitHub];
+const providers: Provider[] = [
+  GitHub,
+  SendGrid({ from: process.env.AUTH_SENDGRID_FROM }),
+];
 export const providerMap = providers.map((provider) => {
   const providerData = typeof provider === 'function' ? provider() : provider;
   return { id: providerData.id, name: providerData.name };
