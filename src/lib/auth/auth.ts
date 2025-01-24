@@ -5,6 +5,7 @@ import type { Provider } from 'next-auth/providers';
 import { SupabaseAdapter } from '@auth/supabase-adapter';
 import jwt from 'jsonwebtoken';
 import { redirect } from 'next/navigation';
+import { sendGridVerificationEmail } from './sendGridVerificationEmail';
 
 import {
   supabaseURL,
@@ -25,7 +26,13 @@ interface ISession {
 // Providers configuration
 const providers: Provider[] = [
   GitHub,
-  SendGrid({ from: process.env.AUTH_SENDGRID_FROM }),
+  SendGrid({
+    server: process.env.AUTH_SENDGRID_SERVER,
+    from: process.env.AUTH_SENDGRID_FROM,
+    sendVerificationRequest: async ({ identifier: email, url, provider }) => {
+      await sendGridVerificationEmail({ email, url, provider });
+    },
+  }),
 ];
 export const providerMap = providers.map((provider) => {
   const providerData = typeof provider === 'function' ? provider() : provider;
@@ -70,6 +77,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.error('Error creating session token:', error);
         return session;
       }
+    },
+    async redirect({ url, baseUrl }) {
+      // Extract the `callbackUrl` from the incoming query parameters
+      const callbackUrl = new URL(url).searchParams.get('callbackUrl');
+
+      // Redirect to the `callbackUrl` if it exists; otherwise, default to `/dashboard`
+      return callbackUrl
+        ? `${baseUrl}/${callbackUrl}}`
+        : `${baseUrl}/dashboard`;
     },
   },
 });
